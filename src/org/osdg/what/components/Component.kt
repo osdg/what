@@ -43,4 +43,7 @@ open class Component(htmlTag: String, value: String? = null) : IContainer {
         return _htmlNode;
     }
 
+    fun css(name: String, value: String) {
+        getHtmlNode().asDynamic()["style"][name] = value;
+    }
 }

@@ -1,6 +1,8 @@
 package org.osdg.what.components
 
+import org.w3c.dom.events.Event
 import kotlin.browser.document
+import kotlin.browser.window
 
 /**
  * Created by plter on 7/29/16.
@@ -26,9 +28,17 @@ open class Application : IContainer {
         return _rootContainer;
     }
 
+    fun addListeners() {
+        window.onresize = { e: Event ->
+
+        };
+    }
+
     private val _rootContainer = Box();
 
     init {
+        addListeners();
+
         document.body?.appendChild(_rootContainer.getHtmlNode()!!);
     }
 }

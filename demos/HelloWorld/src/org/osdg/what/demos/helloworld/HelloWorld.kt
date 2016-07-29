@@ -9,7 +9,9 @@ import org.osdg.what.components.Component
 
 class HelloWorld() : Application() {
     init {
-        addChild(Component("h1", "Hello World"));
+        val c = Component("h1", "Hello World");
+        c.css("color", "#ff0000");
+        addChild(c);
     }
 }
 
