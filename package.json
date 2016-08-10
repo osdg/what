@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-typescript": "^2.13.6",
+    "gulp-uglify": "^2.0.0",
+    "through2": "^2.0.1"
+  }
+}
