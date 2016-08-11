@@ -87,5 +87,6 @@ global.whatProject = function (projectName, projectSrcFiles, projectDir) {
 
 require("./examples/HelloWorld/gulpfile");
 require("./examples/ValueChange/gulpfile");
+require("./examples/Clock/gulpfile");
 
 gulp.task("default", allTargets);
