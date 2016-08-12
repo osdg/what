@@ -5,14 +5,20 @@
 namespace what {
     export class Component {
 
-        private _htmlNode;
+        private static KEY_WHAT_COMPONENT: string = "whatComponent";
+        private _htmlNode: HTMLElement;
 
         constructor(tagName: string) {
             this._htmlNode = document.createElement(tagName);
+            this._htmlNode[Component.KEY_WHAT_COMPONENT] = this;
         }
 
-        get htmlNode() {
+        get htmlNode(): HTMLElement {
             return this._htmlNode;
+        }
+
+        get parent(): Component {
+            return this.htmlNode.parentNode[Component.KEY_WHAT_COMPONENT];
         }
 
         /**
@@ -48,7 +54,7 @@ namespace what {
         }
 
         get innerHTML(): string {
-            return this.htmlNode;
+            return this.htmlNode.innerHTML;
         }
     }
 }

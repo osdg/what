@@ -3,7 +3,7 @@
  */
 
 namespace what {
-    export class Scene extends Div {
+    export class Scene extends AbsoluteLayout {
 
         constructor() {
             super();

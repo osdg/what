@@ -17,6 +17,8 @@ addToArray(libSrcFiles, [
     `${__dirname}/components/VBox.ts`,
     `${__dirname}/components/HBox.ts`,
     `${__dirname}/components/Application.ts`,
+    `${__dirname}/game/AbsoluteLayout.ts`,
+    `${__dirname}/game/Sprite.ts`,
     `${__dirname}/game/Scene.ts`,
     `${__dirname}/game/GameApplication.ts`
 ]);

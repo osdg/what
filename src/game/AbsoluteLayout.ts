@@ -3,12 +3,12 @@
  */
 
 namespace what {
-    export class GameApplication extends AbsoluteLayout {
+    export class AbsoluteLayout extends Div {
 
         constructor() {
             super();
 
-            document.body.appendChild(this.htmlNode);
+            this.css("position", "absolute");
         }
     }
 }
