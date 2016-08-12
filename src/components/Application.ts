@@ -3,10 +3,10 @@
  */
 
 namespace what {
-    export class Application extends Component {
+    export class Application extends Div {
 
         constructor() {
-            super("div");
+            super();
             this.initApplicationProperties();
 
             document.body.appendChild(this.htmlNode);
@@ -20,8 +20,8 @@ namespace what {
         }
 
         private resizeApplicationSize() {
-            this.htmlNode.style.width = window.innerWidth + "px";
-            this.htmlNode.style.height = window.innerHeight + "px";
+            this.css("width", window.innerWidth + "px");
+            this.css("height", window.innerHeight + "px");
         }
 
         private initApplicationProperties() {
