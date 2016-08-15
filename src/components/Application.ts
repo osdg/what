@@ -8,6 +8,8 @@ namespace what {
         constructor() {
             super();
             this.initApplicationProperties();
+            this.width = this.appWidth;
+            this.height = this.appHeight;
 
             document.body.appendChild(this.htmlNode);
             this.resizeApplicationSize();
@@ -20,13 +22,24 @@ namespace what {
         }
 
         private resizeApplicationSize() {
-            this.css("width", window.innerWidth + "px");
-            this.css("height", window.innerHeight + "px");
+            this.appWidth.data = window.innerWidth;
+            this.appHeight.data = window.innerHeight;
         }
 
         private initApplicationProperties() {
             document.body.style.margin = "0";
             document.body.style.overflow = "hidden";
         }
+
+        get appWidth(): what.Value<number> {
+            return this._appWidth;
+        }
+
+        get appHeight(): what.Value<number> {
+            return this._appHeight;
+        }
+
+        private _appWidth: Value<number> = new Value(0);
+        private _appHeight: Value<number> = new Value(0);
     }
 }

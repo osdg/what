@@ -9,6 +9,10 @@ namespace what {
         private _htmlNode: HTMLElement;
 
         constructor(tagName: string) {
+            //init listeners
+            this.thisWidthValueChangeHandler = this.widthValueChangeHandler.bind(this);
+            this.thisHeightValueChangeHandler = this.heightValueChangeHandler.bind(this);
+
             this._htmlNode = document.createElement(tagName);
             this._htmlNode[Component.KEY_WHAT_COMPONENT] = this;
         }
@@ -56,5 +60,48 @@ namespace what {
         get innerHTML(): string {
             return this.htmlNode.innerHTML;
         }
+
+
+        private widthValueChangeHandler(e: ValueEvent<number>) {
+            this.css("width", this.width.data + "px");
+        }
+
+        private thisWidthValueChangeHandler: (e: ValueEvent<number>)=>void;
+
+        private heightValueChangeHandler(e: ValueEvent<number>) {
+            this.css("height", this.height.data + "px");
+        }
+
+        private thisHeightValueChangeHandler: (e: ValueEvent<number>)=>void;
+
+
+        get width(): what.Value<number> {
+            return this._width;
+        }
+
+        set width(value: what.Value<number>) {
+            if (this._width) {
+                this._width.removeEventListener(ValueEvent.CHANGE, this.thisWidthValueChangeHandler);
+            }
+            this._width = value;
+            this._width.addEventListener(ValueEvent.CHANGE, this.thisWidthValueChangeHandler);
+            this.thisWidthValueChangeHandler(null);
+        }
+
+        get height(): what.Value<number> {
+            return this._height;
+        }
+
+        set height(value: what.Value<number>) {
+            if (this._height) {
+                this._height.removeEventListener(ValueEvent.CHANGE, this.thisHeightValueChangeHandler);
+            }
+            this._height = value;
+            this._height.addEventListener(ValueEvent.CHANGE, this.thisHeightValueChangeHandler);
+            this.thisHeightValueChangeHandler(null);
+        }
+
+        private _width: Value<number> = new Value(0);
+        private _height: Value<number> = new Value(0);
     }
 }

@@ -30,5 +30,9 @@ namespace what {
                 this.dispatchEvent(new ValueEvent(ValueEvent.CHANGE, value, old));
             }
         }
+
+        toString(): string {
+            return this.data.toString();
+        }
     }
 }
