@@ -13,12 +13,12 @@ namespace what.examples {
             this.addChild(hbox);
 
             var div = new Box();
-            div.flex(1);
+            div.flex("1");
             div.css({backgroundColor: "red", height: "100%"});
             hbox.addChild(div);
 
             div = new Box();
-            div.flex(1);
+            div.flex("1");
             div.css({backgroundColor: "green", height: "100%"});
             hbox.addChild(div);
 

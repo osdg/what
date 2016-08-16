@@ -8,6 +8,8 @@ addToArray(libSrcFiles, [
     `${__dirname}/events/EventDispatcher.ts`,
     `${__dirname}/data/ValueEvent.ts`,
     `${__dirname}/data/Value.ts`,
+    `${__dirname}/components/ContextMenuItem.ts`,
+    `${__dirname}/components/ContextMenu.ts`,
     `${__dirname}/components/Component.ts`,
     `${__dirname}/components/Text.ts`,
     `${__dirname}/components/Span.ts`,

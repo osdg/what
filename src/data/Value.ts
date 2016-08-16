@@ -10,7 +10,7 @@ namespace what {
 
         constructor(data: T) {
             super();
-            this._data = data;
+            this.data = data;
         }
 
         get data(): T {
@@ -19,15 +19,16 @@ namespace what {
 
         set data(value: T) {
             var old = this._data;
-
-            if (this.dispatchEvent(
-                    new ValueEvent(ValueEvent.CHANGING, value, this._data, {
-                        bubbles: false,
-                        cancelable: true
-                    })
-                )) {
-                this._data = value;
-                this.dispatchEvent(new ValueEvent(ValueEvent.CHANGE, value, old));
+            if (old != value) {
+                if (this.dispatchEvent(
+                        new ValueEvent(ValueEvent.CHANGING, value, this._data, {
+                            bubbles: false,
+                            cancelable: true
+                        })
+                    )) {
+                    this._data = value;
+                    this.dispatchEvent(new ValueEvent(ValueEvent.CHANGE, value, old));
+                }
             }
         }
 

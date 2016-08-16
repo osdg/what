@@ -12,6 +12,7 @@ namespace what {
             //init listeners
             this.thisWidthValueChangeHandler = this.widthValueChangeHandler.bind(this);
             this.thisHeightValueChangeHandler = this.heightValueChangeHandler.bind(this);
+            this.thisOnContextMenuHandler = this.onContextMenuHandler.bind(this);
 
             this._htmlNode = document.createElement(tagName);
             this._htmlNode[Component.KEY_WHAT_COMPONENT] = this;
@@ -27,10 +28,10 @@ namespace what {
 
         /**
          * Set the css styles
-         * @param {String|Object} nameOrStyles
-         * @param {String} value
+         * @param {string|Object} nameOrStyles
+         * @param {string} value
          */
-        css(nameOrStyles, value?) {
+        css(nameOrStyles: string|any, value?: string) {
             switch (typeof nameOrStyles) {
                 case "string":
                     this.htmlNode.style[nameOrStyles] = value;
@@ -103,5 +104,53 @@ namespace what {
 
         private _width: Value<number> = new Value(0);
         private _height: Value<number> = new Value(0);
+
+
+        get useCustomContextMenu(): boolean {
+            return this._useCustomContextMenu;
+        }
+
+        set useCustomContextMenu(value: boolean) {
+            this._useCustomContextMenu = value;
+            if (this._useCustomContextMenu) {
+                this.htmlNode.addEventListener("contextmenu", this.thisOnContextMenuHandler);
+            } else {
+                this.htmlNode.removeEventListener("contextmenu", this.thisOnContextMenuHandler);
+            }
+        }
+
+        private _useCustomContextMenu: boolean = false;
+
+        private onContextMenuHandler(event) {
+
+            if (this._useCustomContextMenu) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                if (this.customContextMenu) {
+                    this.customContextMenu.showMenu(event.clientX, event.clientY);
+                }
+            }
+        }
+
+        private thisOnContextMenuHandler;
+
+        private _customContextMenu: ContextMenu;
+
+        get customContextMenu(): ContextMenu {
+            return this._customContextMenu;
+        }
+
+        set customContextMenu(value: ContextMenu) {
+            if (this._customContextMenu) {
+                document.body.removeChild(this._customContextMenu.node);
+            }
+            this._customContextMenu = value;
+
+            if (this._customContextMenu) {
+                document.body.appendChild(this._customContextMenu.node);
+                this._customContextMenu.hide();
+            }
+        }
     }
 }

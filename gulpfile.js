@@ -89,5 +89,6 @@ require("./examples/HelloWorld/gulpfile");
 require("./examples/ValueChange/gulpfile");
 require("./examples/Clock/gulpfile");
 require("./examples/HBox/gulpfile");
+require("./examples/CustomContextMenu/gulpfile");
 
 gulp.task("default", allTargets);

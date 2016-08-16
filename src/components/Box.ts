@@ -11,7 +11,7 @@ namespace what {
             this.css("display", "flex");
         }
 
-        flex(value: number) {
+        flex(value: string) {
             this.css("flex", value);
         }
     }
