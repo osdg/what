@@ -10,7 +10,7 @@ namespace what {
 
         constructor(data: T) {
             super();
-            this.data = data;
+            this._data = data;
         }
 
         get data(): T {

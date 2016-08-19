@@ -90,5 +90,6 @@ require("./examples/ValueChange/gulpfile");
 require("./examples/Clock/gulpfile");
 require("./examples/HBox/gulpfile");
 require("./examples/CustomContextMenu/gulpfile");
+require("./examples/TextInput/gulpfile");
 
 gulp.task("default", allTargets);

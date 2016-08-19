@@ -18,12 +18,12 @@ namespace what {
             this._htmlNode[Component.KEY_WHAT_COMPONENT] = this;
         }
 
-        get htmlNode(): HTMLElement {
+        public get htmlNode(): HTMLElement {
             return this._htmlNode;
         }
 
-        get parent(): Component {
-            return this.htmlNode.parentNode[Component.KEY_WHAT_COMPONENT];
+        public get parent(): Component {
+            return this.htmlNode.parentNode ? this.htmlNode.parentNode[Component.KEY_WHAT_COMPONENT] : null;
         }
 
         /**

@@ -4,7 +4,7 @@
 
 namespace what {
 
-    export class Span extends Text {
+    export class Span extends TextView {
 
         constructor(value: what.Value<string>) {
             super("span", value);

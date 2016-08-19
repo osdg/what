@@ -1,9 +1,7 @@
-# what
-Without html application technology
+/**
+ * Created by plter on 8/10/16.
+ */
 
-
-##使用示例
-```typescript
 namespace what.examples.textinput {
 
     export class Main extends Application {
@@ -23,4 +21,3 @@ namespace what.examples.textinput {
 
     new Main();
 }
-```
