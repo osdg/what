@@ -3,6 +3,9 @@ Without html application technology
 
 
 ##使用示例
+
+效果演示:[https://osdg.github.io/what/examples/TextInput/Release/](https://osdg.github.io/what/examples/TextInput/Release/)
+
 ```typescript
 namespace what.examples.textinput {
 
