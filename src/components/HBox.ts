@@ -5,8 +5,8 @@
 namespace what {
     export class HBox extends Box {
 
-        constructor() {
-            super();
+        constructor(tagNameOrTag?: string|HTMLDivElement) {
+            super(tagNameOrTag);
 
             this.css("flex-direction", "row");
         }

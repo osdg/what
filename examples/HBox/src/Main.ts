@@ -6,25 +6,18 @@ namespace what.examples {
     class Main extends Application {
 
         constructor() {
-            super();
+            super(document.querySelector("#app") as HTMLDivElement);
 
-            var hbox = new HBox();
-            hbox.css({height: "200px"});
-            this.addChild(hbox);
+            var hbox = new HBox(document.querySelector(".hbox") as HTMLDivElement);
 
-            var div = new Box();
+            var div = new Box(document.querySelector(".hbox .b1") as HTMLDivElement);
             div.flex("1");
-            div.css({backgroundColor: "red", height: "100%"});
-            hbox.addChild(div);
 
-            div = new Box();
+            div = new Box(document.querySelector(".hbox .b2") as HTMLDivElement);
             div.flex("1");
-            div.css({backgroundColor: "green", height: "100%"});
-            hbox.addChild(div);
 
-            div = new Box();
-            div.css({backgroundColor: "blue", width: "50px", height: "100%"});
-            hbox.addChild(div);
+            div = new Box(document.querySelector(".hbox .b3") as HTMLDivElement);
+            div.css("width", "100px");
         }
     }
 

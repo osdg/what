@@ -160,5 +160,23 @@ namespace what {
                 this.css("width", this.width.value + "px");
             }.bind(this);
         }
+
+        hasClassName(name: string): boolean {
+            return this.htmlNode.className.indexOf(name) != -1;
+        }
+
+        addClassName(name: string): void {
+            if (!this.hasClassName(name)) {
+                this.htmlNode.className += " " + name;
+            }
+        }
+
+        removeClassName(name: string): void {
+            this.htmlNode.className = this.htmlNode.className.replace(name, "");
+        }
+
+        getClassNames(): string {
+            return this.htmlNode.className;
+        }
     }
 }

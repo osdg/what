@@ -4,8 +4,8 @@
 namespace what {
     export class H1 extends TextView {
 
-        constructor(value: what.Value<string>) {
-            super("h1", value);
+        constructor(tagNameOrTag: string|HTMLElement = "h1", value?: what.Value<string>) {
+            super(tagNameOrTag, value);
         }
     }
 }

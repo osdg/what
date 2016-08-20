@@ -3,8 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>HBox</title>
+
+    <style>
+        .b1 {
+            background-color: red;
+        }
+
+        .b2 {
+            background-color: green;
+        }
+
+        .b3 {
+            background-color: blue;
+        }
+
+        .box {
+            height: 100%;
+        }
+
+        .hbox{
+            height: 200px;
+        }
+    </style>
 </head>
 <body>
+
+<div id="app">
+    <div class="hbox">
+        <div class="box b1"></div>
+        <div class="box b2"></div>
+        <div class="box b3"></div>
+    </div>
+</div>
+
 ${SCRIPT}
 </body>
 </html>

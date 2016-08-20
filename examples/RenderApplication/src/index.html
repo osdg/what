@@ -3,10 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Render Application</title>
+
+    <style>
+        #head{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        .h{
+            background-color: red;
+        }
+    </style>
 </head>
 <body>
 
-<div id="application"></div>
+<div id="application">
+    <h1 id="head"></h1>
+</div>
 
 ${SCRIPT}
 </body>

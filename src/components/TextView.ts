@@ -5,8 +5,9 @@
 namespace what {
     export class TextView extends Component {
 
-        constructor(tagName: string, value: what.Value<string>) {
-            super(tagName);
+
+        constructor(tagNameOrTag: string|HTMLElement, value: Value<string> = new Value("")) {
+            super(tagNameOrTag);
 
             this._thisTextChangeHandler = this.textChangeHandler.bind(this);
 

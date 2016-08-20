@@ -10,8 +10,8 @@ namespace what {
         private _node: HTMLInputElement;
         private willFresh: boolean = true;
 
-        constructor(value: what.Value<string> = new Value("")) {
-            super("input", value);
+        constructor(tagNameOrTag?: string|HTMLElement = "input", value: what.Value<string> = new Value("")) {
+            super(tagNameOrTag, value);
 
             this._thisNativeTextChangeHandler = this.nativeTextChangeHandler.bind(this);
 

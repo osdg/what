@@ -5,8 +5,9 @@
 namespace what {
     export class Box extends Div {
 
-        constructor() {
-            super();
+
+        constructor(tagNameOrTag?: string|HTMLDivElement) {
+            super(tagNameOrTag);
 
             this.css("display", "flex");
         }
