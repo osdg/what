@@ -39,7 +39,7 @@ namespace what {
          * Refresh the content or value by the new value
          */
         protected refresh(): void {
-            this.htmlNode.innerHTML = this.text.data;
+            this.htmlNode.innerHTML = this.text.value;
         }
     }
 }

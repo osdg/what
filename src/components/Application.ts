@@ -5,8 +5,12 @@
 namespace what {
     export class Application extends Div {
 
-        constructor() {
-            super();
+        private windowResizeHandler;
+        private titleChangeHandler;
+
+        constructor(element?: HTMLDivElement) {
+            super(element);
+
             this.initApplicationProperties();
             this.width = this.appWidth;
             this.height = this.appHeight;
@@ -14,16 +18,13 @@ namespace what {
             document.body.appendChild(this.htmlNode);
             this.resizeApplicationSize();
 
-            window.addEventListener("resize", this.windowResizeHandler.bind(this));
-        }
-
-        private windowResizeHandler(event: Event) {
-            this.resizeApplicationSize();
+            this.application_createListeners();
+            window.addEventListener("resize", this.windowResizeHandler);
         }
 
         private resizeApplicationSize() {
-            this.appWidth.data = window.innerWidth;
-            this.appHeight.data = window.innerHeight;
+            this.appWidth.value = window.innerWidth;
+            this.appHeight.value = window.innerHeight;
         }
 
         private initApplicationProperties() {
@@ -41,5 +42,34 @@ namespace what {
 
         private _appWidth: Value<number> = new Value(0);
         private _appHeight: Value<number> = new Value(0);
+
+        private refreshTitle() {
+            document.title = this.title.value;
+        }
+
+        private _title: Value<string>;
+
+        get title(): what.Value<string> {
+            return this._title;
+        }
+
+        set title(value: what.Value<string>) {
+            if (this._title) {
+                this._title.removeEventListener(ValueEvent.CHANGE, this.titleChangeHandler);
+            }
+            this._title = value;
+            this._title.addEventListener(ValueEvent.CHANGE, this.titleChangeHandler);
+            this.refreshTitle();
+        }
+
+        private application_createListeners(): void {
+            this.windowResizeHandler = function (e: Event) {
+                this.resizeApplicationSize();
+            }.bind(this);
+
+            this.titleChangeHandler = function (e: ValueEvent<string>) {
+                this.refreshTitle();
+            }.bind(this);
+        }
     }
 }

@@ -91,5 +91,7 @@ require("./examples/Clock/gulpfile");
 require("./examples/HBox/gulpfile");
 require("./examples/CustomContextMenu/gulpfile");
 require("./examples/TextInput/gulpfile");
+require("./examples/Title/gulpfile");
+require("./examples/RenderApplication/gulpfile");
 
 gulp.task("default", allTargets);

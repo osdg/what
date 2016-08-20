@@ -7,14 +7,29 @@ namespace what {
 
         private static KEY_WHAT_COMPONENT: string = "whatComponent";
         private _htmlNode: HTMLElement;
+        private onContextMenuHandler;
+        private heightValueChangeHandler;
+        private widthValueChangeHandler;
 
-        constructor(tagName: string) {
-            //init listeners
-            this.thisWidthValueChangeHandler = this.widthValueChangeHandler.bind(this);
-            this.thisHeightValueChangeHandler = this.heightValueChangeHandler.bind(this);
-            this.thisOnContextMenuHandler = this.onContextMenuHandler.bind(this);
+        constructor(tagNameOrTag: string|HTMLElement) {
 
-            this._htmlNode = document.createElement(tagName);
+            this.component_createListeners();
+
+            switch (typeof tagNameOrTag) {
+                case "string":
+                    this._htmlNode = document.createElement(tagNameOrTag as string);
+                    break;
+                case "object":
+                    if (tagNameOrTag instanceof HTMLElement) {
+                        this._htmlNode = tagNameOrTag;
+                    } else {
+                        throw new Error("Argument type error");
+                    }
+                    break;
+                default:
+                    throw new Error("Argument type error");
+            }
+
             this._htmlNode[Component.KEY_WHAT_COMPONENT] = this;
         }
 
@@ -62,31 +77,17 @@ namespace what {
             return this.htmlNode.innerHTML;
         }
 
-
-        private widthValueChangeHandler(e: ValueEvent<number>) {
-            this.css("width", this.width.data + "px");
-        }
-
-        private thisWidthValueChangeHandler: (e: ValueEvent<number>)=>void;
-
-        private heightValueChangeHandler(e: ValueEvent<number>) {
-            this.css("height", this.height.data + "px");
-        }
-
-        private thisHeightValueChangeHandler: (e: ValueEvent<number>)=>void;
-
-
         get width(): what.Value<number> {
             return this._width;
         }
 
         set width(value: what.Value<number>) {
             if (this._width) {
-                this._width.removeEventListener(ValueEvent.CHANGE, this.thisWidthValueChangeHandler);
+                this._width.removeEventListener(ValueEvent.CHANGE, this.widthValueChangeHandler);
             }
             this._width = value;
-            this._width.addEventListener(ValueEvent.CHANGE, this.thisWidthValueChangeHandler);
-            this.thisWidthValueChangeHandler(null);
+            this._width.addEventListener(ValueEvent.CHANGE, this.widthValueChangeHandler);
+            this.widthValueChangeHandler(null);
         }
 
         get height(): what.Value<number> {
@@ -95,11 +96,11 @@ namespace what {
 
         set height(value: what.Value<number>) {
             if (this._height) {
-                this._height.removeEventListener(ValueEvent.CHANGE, this.thisHeightValueChangeHandler);
+                this._height.removeEventListener(ValueEvent.CHANGE, this.heightValueChangeHandler);
             }
             this._height = value;
-            this._height.addEventListener(ValueEvent.CHANGE, this.thisHeightValueChangeHandler);
-            this.thisHeightValueChangeHandler(null);
+            this._height.addEventListener(ValueEvent.CHANGE, this.heightValueChangeHandler);
+            this.heightValueChangeHandler(null);
         }
 
         private _width: Value<number> = new Value(0);
@@ -113,27 +114,13 @@ namespace what {
         set useCustomContextMenu(value: boolean) {
             this._useCustomContextMenu = value;
             if (this._useCustomContextMenu) {
-                this.htmlNode.addEventListener("contextmenu", this.thisOnContextMenuHandler);
+                this.htmlNode.addEventListener("contextmenu", this.onContextMenuHandler);
             } else {
-                this.htmlNode.removeEventListener("contextmenu", this.thisOnContextMenuHandler);
+                this.htmlNode.removeEventListener("contextmenu", this.onContextMenuHandler);
             }
         }
 
         private _useCustomContextMenu: boolean = false;
-
-        private onContextMenuHandler(event) {
-
-            if (this._useCustomContextMenu) {
-                event.preventDefault();
-                event.stopPropagation();
-
-                if (this.customContextMenu) {
-                    this.customContextMenu.showMenu(event.clientX, event.clientY);
-                }
-            }
-        }
-
-        private thisOnContextMenuHandler;
 
         private _customContextMenu: ContextMenu;
 
@@ -151,6 +138,27 @@ namespace what {
                 document.body.appendChild(this._customContextMenu.node);
                 this._customContextMenu.hide();
             }
+        }
+
+        private component_createListeners() {
+            this.onContextMenuHandler = function (event) {
+                if (this._useCustomContextMenu) {
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    if (this.customContextMenu) {
+                        this.customContextMenu.showMenu(event.clientX, event.clientY);
+                    }
+                }
+            }.bind(this);
+
+            this.heightValueChangeHandler = function (e) {
+                this.css("height", this.height.value + "px");
+            }.bind(this);
+
+            this.widthValueChangeHandler = function (e) {
+                this.css("width", this.width.value + "px");
+            }.bind(this);
         }
     }
 }

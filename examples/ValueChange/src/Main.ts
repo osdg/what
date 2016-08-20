@@ -18,7 +18,7 @@ namespace what.examples {
             setInterval(function () {
                 count++;
 
-                this._value.data = "" + count;
+                this._value.value = "" + count;
             }.bind(this), 100);
         }
     }

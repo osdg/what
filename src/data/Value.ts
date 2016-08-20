@@ -6,34 +6,34 @@ namespace what {
 
     export class Value<T> extends EventDispatcher<ValueEvent<T>> {
 
-        private _data: T;
+        private _value: T;
 
         constructor(data: T) {
             super();
-            this._data = data;
+            this._value = data;
         }
 
-        get data(): T {
-            return this._data;
+        get value(): T {
+            return this._value;
         }
 
-        set data(value: T) {
-            var old = this._data;
-            if (old != value) {
+        set value(t: T) {
+            var old = this._value;
+            if (old != t) {
                 if (this.dispatchEvent(
-                        new ValueEvent(ValueEvent.CHANGING, value, this._data, {
+                        new ValueEvent(ValueEvent.CHANGING, t, this._value, {
                             bubbles: false,
                             cancelable: true
                         })
                     )) {
-                    this._data = value;
-                    this.dispatchEvent(new ValueEvent(ValueEvent.CHANGE, value, old));
+                    this._value = t;
+                    this.dispatchEvent(new ValueEvent(ValueEvent.CHANGE, t, old));
                 }
             }
         }
 
         toString(): string {
-            return this.data.toString();
+            return this.value.toString();
         }
     }
 }

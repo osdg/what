@@ -23,13 +23,13 @@ namespace what {
 
         protected refresh(): void {
             if (this.willFresh) {
-                this._node.value = this.text.data;
+                this._node.value = this.text.value;
             }
         }
 
         private nativeTextChangeHandler(e) {
             this.willFresh = false;
-            this.text.data = this._node.value;
+            this.text.value = this._node.value;
             this.willFresh = true;
         }
 

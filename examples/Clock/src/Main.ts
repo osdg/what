@@ -20,7 +20,7 @@ namespace what.examples {
 
         private timerHandler() {
             var date = new Date();
-            this._time.data = this.timeFormat(date.getHours()) + ":" + this.timeFormat(date.getMinutes()) + ":" + this.timeFormat(date.getSeconds());
+            this._time.value = this.timeFormat(date.getHours()) + ":" + this.timeFormat(date.getMinutes()) + ":" + this.timeFormat(date.getSeconds());
         }
 
         private timeFormat(num): string {

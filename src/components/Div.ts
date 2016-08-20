@@ -5,8 +5,8 @@
 namespace what {
     export class Div extends Component {
 
-        constructor() {
-            super("div");
+        constructor(tagNameOrTag: string|HTMLDivElement = "div") {
+            super(tagNameOrTag);
         }
     }
 }
